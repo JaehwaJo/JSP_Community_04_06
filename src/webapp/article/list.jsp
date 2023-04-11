@@ -15,7 +15,13 @@
 <body>
   <h1>게시물 리스트</h1>
   
-  <table border="1">
+  <table border="1" style="text-align:center;">
+    <colgroup>
+      <col width="100">
+      <col>
+      <col>
+      <col width="100">
+    </colgroup>
     <thead>
       <tr>
         <th>번호</th>
@@ -41,7 +47,10 @@
         <% } %>
     </tbody>
   </table>
-  
+
+  <div>
+    <a href="../home/main">홈으로 돌아가기</a>
+  </div>
 
 
 </body>
