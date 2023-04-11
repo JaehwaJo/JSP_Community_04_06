@@ -1,4 +1,4 @@
-package com.sbs.exam;
+package com.sbs.exam.util;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
