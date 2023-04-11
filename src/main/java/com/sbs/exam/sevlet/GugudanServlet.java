@@ -1,6 +1,6 @@
 package com.sbs.exam.sevlet;
 
-import com.sbs.exam.util.Rq;
+import com.sbs.exam.Rq;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
