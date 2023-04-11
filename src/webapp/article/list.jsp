@@ -14,7 +14,7 @@
 </head>
 <body>
   <h1>게시물 리스트</h1>
-
+  
   <table border="1">
     <thead>
       <tr>
@@ -32,12 +32,16 @@
           <td><%= articleRow.get("id")%>번</td>
           <td><%= articleRow.get("regDate")%></td>
           <td><%= articleRow.get("updateDate")%></td>
-          <td><%= articleRow.get("title")%></td>
+          <td>
+            <a href="detail?id=<%= (int) articleRow.get("id")%>">
+              <%= articleRow.get("title")%>
+            </a>
+          </td>
         </tr>
         <% } %>
     </tbody>
   </table>
-
+  
 
 
 </body>

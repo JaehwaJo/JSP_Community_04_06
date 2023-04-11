@@ -8,7 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="JSP_community_04_06" />
-        <module name="JSP_community_0406" />
+        <module name="JSP_Community" />
       </profile>
     </annotationProcessing>
   </component>

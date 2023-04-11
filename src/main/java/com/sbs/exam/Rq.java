@@ -45,5 +45,4 @@ public class Rq {
       throw new RuntimeException(e);
     }
   }
-
 }

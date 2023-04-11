@@ -1,5 +1,6 @@
 package com.sbs.exam.sevlet;
 
+import com.sbs.exam.Rq;
 import com.sbs.exam.util.DBUtil;
 import com.sbs.exam.util.SecSql;
 import jakarta.servlet.ServletException;
@@ -15,10 +16,13 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/article/list")
-public class ArticleListServlet extends HttpServlet {
+@WebServlet("/article/detail")
+public class ArticleDetailServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    Rq rq = new Rq(req, resp);
+
+
     // DB 연결시작
     Connection conn = null;
     try {
@@ -35,15 +39,17 @@ public class ArticleListServlet extends HttpServlet {
 
     try {
       conn = DriverManager.getConnection(url, user, password);
+      int id = rq.getIntParam("id", 0);
 
       SecSql sql = new SecSql();
       sql.append("SELECT *");
       sql.append("FROM article");
+      sql.append("WHERE id = ?", id);
 
-      List<Map<String, Object>> articleRows = DBUtil.selectRows(conn, sql);
+      Map<String, Object> articleRow = DBUtil.selectRow(conn, sql);
 
-      req.setAttribute("articleRows", articleRows);
-      req.getRequestDispatcher("../article/list.jsp").forward(req, resp);
+      req.setAttribute("articleRow", articleRow);
+      req.getRequestDispatcher("../article/detail.jsp").forward(req, resp);
 
     } catch (SQLException e) {
       e.printStackTrace();
