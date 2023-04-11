@@ -22,7 +22,6 @@ public class ArticleDetailServlet extends HttpServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     Rq rq = new Rq(req, resp);
 
-
     // DB 연결시작
     Connection conn = null;
     try {

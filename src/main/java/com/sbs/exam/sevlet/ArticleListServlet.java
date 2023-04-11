@@ -1,5 +1,6 @@
 package com.sbs.exam.sevlet;
 
+import com.sbs.exam.Rq;
 import com.sbs.exam.util.DBUtil;
 import com.sbs.exam.util.SecSql;
 import jakarta.servlet.ServletException;
@@ -19,6 +20,7 @@ import java.util.Map;
 public class ArticleListServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    Rq rq = new Rq(req, resp);
     // DB 연결시작
     Connection conn = null;
     try {
@@ -36,13 +38,28 @@ public class ArticleListServlet extends HttpServlet {
     try {
       conn = DriverManager.getConnection(url, user, password);
 
-      SecSql sql = new SecSql();
+      int page = rq.getIntParam("page", 1);
+      int itemInAPage = 20;
+      int limitFrom = (page - 1) * itemInAPage;
+
+      SecSql sql = SecSql.from("SELECT COUNT(*) AS cnt");
+      sql.append("FROM article");
+
+      int totalCount = DBUtil.selectRowIntValue(conn, sql);
+      int totalPage = (int) Math.ceil((double) totalCount / itemInAPage);
+
+      sql = new SecSql();
       sql.append("SELECT *");
       sql.append("FROM article");
+      sql.append("ORDER BY id DESC");
+      sql.append("LIMIT ?, ?", limitFrom, itemInAPage);
 
       List<Map<String, Object>> articleRows = DBUtil.selectRows(conn, sql);
 
       req.setAttribute("articleRows", articleRows);
+      req.setAttribute("page", page);
+      req.setAttribute("totalPage", totalPage);
+
       req.getRequestDispatcher("../article/list.jsp").forward(req, resp);
 
     } catch (SQLException e) {
