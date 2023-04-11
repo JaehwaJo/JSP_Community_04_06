@@ -1,4 +1,4 @@
-package com.sbs.exam.util;
+package com.sbs.exam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,10 +16,10 @@ public class Rq {
 
     try {
       req.setCharacterEncoding("UTF-8");
-    }
-    catch (UnsupportedEncodingException e) {
+    } catch (UnsupportedEncodingException e) {
       throw new RuntimeException(e);
     }
+
     resp.setCharacterEncoding("UTF-8");
     resp.setContentType("text/html; charset-utf-8");
   }
@@ -30,10 +30,10 @@ public class Rq {
     if (value == null) {
       return defaultValue;
     }
+
     try {
       return Integer.parseInt(value);
-    }
-    catch (NumberFormatException e) {
+    } catch ( NumberFormatException e ) {
       return defaultValue;
     }
   }
@@ -41,8 +41,7 @@ public class Rq {
   public void appendBody(String str) {
     try {
       resp.getWriter().append(str);
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       throw new RuntimeException(e);
     }
   }
