@@ -13,7 +13,9 @@ import java.io.IOException;
 public class ArticleWriteServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    req.getRequestDispatcher("../article/write.jsp").forward(req, resp);
+    Rq rq = new Rq(req, resp);
+
+    rq.jsp("../article/write");
   }
 
   @Override

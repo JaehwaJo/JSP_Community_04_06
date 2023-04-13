@@ -62,7 +62,7 @@ public class ArticleListServlet extends HttpServlet {
       req.setAttribute("page", page);
       req.setAttribute("totalPage", totalPage);
 
-      req.getRequestDispatcher("../article/list.jsp").forward(req, resp);
+      rq.jsp("../article/list");
 
     } catch (SQLException e) {
       e.printStackTrace();

@@ -15,7 +15,7 @@ public class HomeMainServlet extends HttpServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     Rq rq = new Rq(req, resp);
 
-    req.getRequestDispatcher("../home/main.jsp").forward(req, resp);
+    rq.jsp("../home/main");
   }
 
   @Override

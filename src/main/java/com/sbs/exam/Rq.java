@@ -1,5 +1,7 @@
 package com.sbs.exam;
 
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -53,6 +55,16 @@ public class Rq {
       resp.getWriter().append(str);
     } catch (IOException e) {
       throw new RuntimeException(e);
+    }
+  }
+
+  public void jsp(String jspPath) {
+    RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/" + jspPath + ".jsp");
+
+    try {
+      requestDispatcher.forward(req, resp);
+    } catch (ServletException | IOException e) {
+      e.printStackTrace();
     }
   }
 }
