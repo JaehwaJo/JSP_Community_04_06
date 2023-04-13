@@ -1,5 +1,6 @@
 package com.sbs.exam.sevlet;
 
+import com.mysql.cj.Session;
 import com.sbs.exam.Rq;
 import com.sbs.exam.util.DBUtil;
 import com.sbs.exam.util.SecSql;
@@ -21,6 +22,7 @@ public class ArticleListServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     Rq rq = new Rq(req, resp);
+
     // DB 연결시작
     Connection conn = null;
     try {
@@ -39,7 +41,7 @@ public class ArticleListServlet extends HttpServlet {
       conn = DriverManager.getConnection(url, user, password);
 
       int page = rq.getIntParam("page", 1);
-      int itemInAPage = 20;
+      int itemInAPage = 10;
       int limitFrom = (page - 1) * itemInAPage;
 
       SecSql sql = SecSql.from("SELECT COUNT(*) AS cnt");
@@ -74,5 +76,10 @@ public class ArticleListServlet extends HttpServlet {
       }
     }
     // DB 연결 끝
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    doGet(req, resp);
   }
 }
