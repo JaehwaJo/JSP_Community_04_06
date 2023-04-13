@@ -63,9 +63,30 @@
   </style>
 
   <div class="page">
-    <% for(int i = 1; i <= totalPage; i++) { %>
-      <a class="<%= cPage == i ? "red" : "" %>" href="list?page=<%=i%>"><%=i%></a>
-    <% } %>
+    <% if( cPage > 1 ) { %>
+          <a href="list?page=1">◀</a>
+        <% } %>
+
+        <%
+        int pageMenuSize = 5;
+        int from = cPage - pageMenuSize;
+        int end = cPage + pageMenuSize;
+
+        if(from < 1) {
+          from = 1;
+        }
+        if(end > totalPage) {
+          end = totalPage;
+        }
+
+        for(int i = from; i <= end; i++) {
+        %>
+          <a class="<%= cPage == i ? "red" : "" %>" href="list?page=<%=i%>"><%=i%></a>
+        <% } %>
+
+        <% if( cPage < totalPage ) { %>
+        <a href="list?page=<%= totalPage %>">▶</a>
+        <% } %>
   </div>
 
 </body>
