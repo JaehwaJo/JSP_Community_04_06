@@ -16,10 +16,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Map;
 
-@WebServlet("/member/doLogin")
-public class MemberDoLoginServlet extends HttpServlet {
+@WebServlet("/member/doLogout")
+public class MemberDoLogoutServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     Rq rq = new Rq(req, resp);
@@ -39,30 +38,10 @@ public class MemberDoLoginServlet extends HttpServlet {
     try {
       conn = DriverManager.getConnection(Config.getDBUrl(), Config.getDBId(), Config.getDBPw());
 
-      String loginId = rq.getParam("loginId", "");
-      String loginPw = rq.getParam("loginPw", "");
-
-      SecSql sql = SecSql.from("SELECT *");
-      sql.append("FROM member");
-      sql.append("WHERE loginId = ?", loginId);
-
-      Map<String, Object> memberRow = DBUtil.selectRow(conn, sql);
-
-      if(memberRow.isEmpty()) {
-        rq.appendBody("<script>alert('%s(은)는 없는 아이디입니다.'); history.back();</script>".formatted(loginId));
-        return;
-      }
-
-      if(((String)memberRow.get("loginPw")).equals(loginPw) == false ) {
-        rq.appendBody("<script>alert('로그인 비번이 일치하지 않습니다.'); history.back();</script>");
-        return;
-      }
-
       HttpSession session = req.getSession();
-      session.setAttribute("loginedMemberId", memberRow.get("id"));
+      session.removeAttribute("loginedMemberId");
 
-      rq.appendBody("<script>alert('로그인 되었습니다.'); location.replace('../home/main');</script>");
-
+      rq.appendBody("<script>alert('로그아웃 되었습니다.'); location.replace('../home/main');</script>");
 
     } catch (SQLException e) {
       e.printStackTrace();
