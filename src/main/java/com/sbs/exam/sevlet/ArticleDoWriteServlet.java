@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -40,11 +41,21 @@ public class ArticleDoWriteServlet extends HttpServlet {
       String title = rq.getParam("title", "");
       String body = rq.getParam("body", "");
 
+      HttpSession session = req.getSession();
+
+      if (session.getAttribute("loginedMemberId") == null) {
+        rq.appendBody("<script>alert('로그인후 이용해주세요.'); location.replace('../member/login');</script>");
+        return;
+      }
+
+      int loginedMemberId = (int) session.getAttribute("loginedMemberId");
+
       SecSql sql = SecSql.from("INSERT INTO article");
       sql.append("SET regDate = NOW()");
       sql.append(", updateDate = NOW()");
       sql.append(", title = ?", title);
       sql.append(", body = ?", body);
+      sql.append(", memberId = ?", loginedMemberId);
 
       int id = DBUtil.insert(conn, sql);
 
