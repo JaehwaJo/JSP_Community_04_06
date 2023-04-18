@@ -2,6 +2,7 @@ package com.sbs.exam.sevlet;
 
 import com.sbs.exam.Config;
 import com.sbs.exam.Rq;
+import com.sbs.exam.exception.SQLErrorException;
 import com.sbs.exam.util.DBUtil;
 import com.sbs.exam.util.SecSql;
 import jakarta.servlet.ServletException;
@@ -51,6 +52,8 @@ public class ArticleDetailServlet extends HttpServlet {
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } catch (SQLErrorException e) {
+      e.getOrigin().printStackTrace();
     } finally {
       try {
         if (conn != null && !conn.isClosed()) {
