@@ -17,6 +17,8 @@
 <body>
   <h1>게시물 리스트</h1>
 
+  <%@ include file="../part/topBar.jspf" %>
+
   <div>
     <a href="../home/main">홈으로 돌아가기</a>
     &nbsp;
