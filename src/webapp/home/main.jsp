@@ -22,10 +22,11 @@
   <% if( !isLogined ) { %>
     <a href="../member/login">로그인</a>
   <% } %>
-
-  <% if( isLogined ) { %>
   &nbsp;
+  <% if( isLogined ) { %>
+
   <%=loginedMemberId%>번 회원님 환영합니다.
+  &nbsp;
     <a href="../member/doLogout">로그아웃</a>
   <% } %>
 </div>
