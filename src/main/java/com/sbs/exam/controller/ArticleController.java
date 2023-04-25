@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 public class ArticleController extends Controller {
   private ArticleService articleService;
@@ -23,10 +24,10 @@ public class ArticleController extends Controller {
   public void performAction(Rq rq) {
     switch (rq.getActionMethodName()) {
       case "list":
-        actionList(rq);
+        actionShowList(rq);
         break;
       case "write":
-        actionWrite(rq);
+        actionShowWrite(rq);
         break;
       case "doWrite":
         actionDoWrite(rq);
@@ -37,10 +38,59 @@ public class ArticleController extends Controller {
       case "doDelete":
         actionDoDelete(rq);
         break;
+      case "modify":
+        actionShowModify(rq);
+        break;
+      case "doModify":
+        actionDoModify(rq);
+        break;
       default:
         rq.println("존재하지 않는 페이지입니다.");
         break;
     }
+  }
+
+  private void actionDoModify(Rq rq) {
+    int id = rq.getIntParam("id", 0);
+    String title = rq.getParam("title", "");
+    String body = rq.getParam("body", "");
+    String redirectUri = rq.getParam("redirectUri", Util.f("../article/detail?id=%d", id));
+
+    if (id == 0) {
+      rq.historyBack("id를 입력해주세요.");
+      return;
+    }
+
+    if (title.length() == 0) {
+      rq.historyBack("title을 입력해주세요.");
+      return;
+    }
+    if (body.length() == 0) {
+      rq.historyBack("body를 입력해주세요.");
+      return;
+    }
+
+    ResultData modifyRd = articleService.modify(id, title, body);
+    rq.replace(modifyRd.getMsg(), redirectUri);
+  }
+
+  private void actionShowModify(Rq rq) {
+    int id = rq.getIntParam("id", 0);
+
+    if (id == 0) {
+      System.out.println("id를 입력해주세요.");
+      return;
+    }
+
+    Article article = articleService.getForPrintArticleById(id);
+
+    if (article == null) {
+      rq.historyBack(Util.f("%d번 게시물이 존재하지 않습니다.", id));
+      return;
+    }
+
+    rq.setAttr("article", article);
+    rq.jsp("../article/modify");
   }
 
   private void actionDoDelete(Rq rq) {
@@ -77,7 +127,7 @@ public class ArticleController extends Controller {
     rq.jsp("../article/detail");
   }
 
-  private void actionWrite(Rq rq) {
+  private void actionShowWrite(Rq rq) {
     rq.jsp("../article/write");
   }
 
@@ -113,7 +163,7 @@ public class ArticleController extends Controller {
     rq.replace(writeRd.getMsg(), redirectUri);
   }
 
-  public void actionList(Rq rq) {
+  public void actionShowList(Rq rq) {
     int page = rq.getIntParam("page", 1);
     int totalPage = articleService.getForPrintListTotalPage();
 
