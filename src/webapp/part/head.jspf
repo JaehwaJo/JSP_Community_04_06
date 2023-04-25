@@ -9,5 +9,33 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>커뮤니티 블로그 - ${pageTitle}</title>
+
+  <!-- font-awesome 불러오기  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- daisy UI 불러오기  -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.6/dist/full.css" rel="stylesheet" type="text/css" />
+  <!-- tailwind 불러오기 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- 공통 css연결 -->
+  <link rel="stylesheet" href="../resource/common.css">
+  <!-- 공통 js 연결 -->
+  <script defer src="../resource/common.js"></script>
 </head>
 <body>
+
+<div>
+  <c:set var="isLogined" value="${isLogined}"/>
+  <c:if test="${isLogined}">
+    <span>"${loginedMemberRow.get("name")}" 회원님 환영합니다.</span>
+    <a href="../member/doLogout">로그아웃</a>
+  </c:if>
+
+  <c:if test="${!isLogined}">
+    <a href="../member/join">회원가입</a>
+    <a href="../member/login">로그인</a>
+  </c:if>
+
+  <a href="/usr/article/list">게시물 리스트</a>
+</div>

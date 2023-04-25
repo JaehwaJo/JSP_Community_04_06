@@ -3,7 +3,6 @@
 
 <c:set var="pageTitle" value="게시물 작성"/>
 <%@ include file="../part/head.jspf" %>
-<h1>게시물 작성</h1>
 
 <script>
     let ArticleWrite__submitDone = false;

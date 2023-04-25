@@ -3,9 +3,6 @@
 
 <c:set var="pageTitle" value="게시물 상세보기"/>
 <%@ include file="../part/head.jspf" %>
-<h1>게시물 상세보기</h1>
-
-<%@ include file="../part/topBar.jspf" %>
 
 <table border="1" style="text-align: center">
   <colgroup>
