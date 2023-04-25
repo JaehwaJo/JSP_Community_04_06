@@ -3,6 +3,7 @@ package com.sbs.exam.sevlet;
 import com.sbs.exam.Config;
 import com.sbs.exam.Rq;
 import com.sbs.exam.controller.ArticleController;
+import com.sbs.exam.controller.MemberController;
 import com.sbs.exam.exception.SQLErrorException;
 import com.sbs.exam.util.DBUtil;
 import com.sbs.exam.util.SecSql;
@@ -65,9 +66,13 @@ public class DispatcherServlet extends HttpServlet {
       switch (rq.getControllerTypeName()) {
         case "usr" :
           ArticleController articleController = new ArticleController(conn);
+          MemberController memberController = new MemberController(conn);
           switch (rq.getControllerName()) {
             case "article":
               articleController.performAction(rq);
+              break;
+            case "member":
+              memberController.performAction(rq);
               break;
           }
       }

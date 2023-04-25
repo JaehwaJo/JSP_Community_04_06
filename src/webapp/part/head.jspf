@@ -26,9 +26,9 @@
 <body>
 <c:set var="isLogined" value="${isLogined}"/>
 
-<header class="top-bar h-20 bg-[#dfdfdf]">
-  <div class="container mx-auto h-full flex">
-    <a href="/home/main" class="top-bar__logo flex items-center text-xl">
+<header class="top-bar h-20 bg-[#afafaf]">
+  <div class="container mx-auto h-full flex px-3">
+    <a href="/usr/home/main" class="top-bar__logo flex items-center text-xl">
 			<span>
 				<i class="fa-solid fa-dumbbell"></i>
 			</span>
@@ -40,46 +40,50 @@
 
     <nav class="top-bar__menu-box-1">
       <ul class="flex h-full">
-        <li>
+        <li class="hover:bg-white hover:text-[#afafaf]">
           <c:if test="${!isLogined}">
-            <a class="flex h-full items-center px-3" href="../member/join">
+            <a class="flex h-full items-center px-3" href="/usr/member/join">
               <span><i class="fa-solid fa-user-plus"></i></span>
               &nbsp;
-              JOIN
+              <span>JOIN</span>
             </a>
           </c:if>
-
         </li>
-        <li>
+        <li class="hover:bg-white hover:text-[#afafaf]">
           <c:if test="${!isLogined}">
-            <a class="flex h-full items-center px-3" href="../member/login">
+            <a class="flex h-full items-center px-3" href="/usr/member/login">
               <spna><i class="fa-solid fa-user"></i></spna>
               &nbsp;
-              LOGIN
+              <span>LOGIN</span>
             </a>
           </c:if>
         </li>
-        <li>
+        <li class="hover:bg-white hover:text-[#afafaf]">
           <c:if test="${isLogined}">
-            <a class="flex h-full items-center px-3" href="../member/doLogout">
-              <span>"${loginedMemberRow.get("name")}" 회원님 환영합니다.</span>
+            <a class="flex h-full items-center px-3" href="/usr/member/myPage">
+              <spna><i class="fa-solid fa-heart"></i></spna>
+              &nbsp;
+              <span>"${loginedMemberRow.get("name")}" 회원</span>
+            </a>
+          </c:if>
+        </li>
+        <li class="hover:bg-white hover:text-[#afafaf]">
+          <c:if test="${isLogined}">
+            <a class="flex h-full items-center px-3" href="/usr/member/doLogout">
               <spna><i class="fa-solid fa-arrow-right-from-bracket"></i></spna>
               &nbsp;
-              LOGOUT
+              <span>LOGOUT</span>
             </a>
           </c:if>
         </li>
-        <li>
+        <li class="hover:bg-white hover:text-[#afafaf]">
           <a class="flex h-full items-center px-3" href="/usr/article/list">
             <span><i class="fa-solid fa-newspaper"></i></span>
             &nbsp;
-            ARTICLE LIST
+            <span>ARTICLE LIST</span>
           </a>
         </li>
       </ul>
     </nav>
   </div>
 </header>
-<div>
-
-</div>

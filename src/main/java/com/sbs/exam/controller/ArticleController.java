@@ -4,14 +4,11 @@ import com.sbs.exam.Rq;
 import com.sbs.exam.dto.Article;
 import com.sbs.exam.dto.ResultData;
 import com.sbs.exam.service.ArticleService;
-import com.sbs.exam.util.DBUtil;
-import com.sbs.exam.util.SecSql;
 import com.sbs.exam.util.Util;
 import jakarta.servlet.http.HttpSession;
 
 import java.sql.Connection;
 import java.util.List;
-import java.util.Map;
 
 public class ArticleController extends Controller {
   private ArticleService articleService;
