@@ -48,8 +48,7 @@ public class ArticleDoModifyServlet extends HttpServlet {
       sql.append("WHERE id = ?", id);
 
       DBUtil.update(conn, sql);
-
-      rq.appendBody("<script>alert('%d번 글이 수정되었습니다.'); location.replace('detail?id=%d');</script>".formatted(id, id));
+      rq.print("<script>alert('%d번 글이 수정되었습니다.'); location.replace('detail?id=%d');</script>".formatted(id, id));
 
     } catch (SQLException e) {
       e.printStackTrace();

@@ -48,7 +48,7 @@ public class MemberDoJoinServlet extends HttpServlet {
       boolean isJoinDuplicateLoginId = DBUtil.selectRowIntValue(conn, sql) == 0;
 
       if(isJoinDuplicateLoginId == false) {
-        rq.appendBody("<script>alert('%s (은)는 이미 사용중인 아이디입니다.'); history.back(); </script>".formatted(loginId));
+        rq.print("<script>alert('%s (은)는 이미 사용중인 아이디입니다.'); history.back(); </script>".formatted(loginId));
         return;
       }
 
@@ -61,7 +61,7 @@ public class MemberDoJoinServlet extends HttpServlet {
 
       int id = DBUtil.insert(conn, sql);
 
-      rq.appendBody("<script>alert('%d번 회원이 생성되었습니다.'); location.replace('../home/main');</script>".formatted(id));
+      rq.print("<script>alert('%d번 회원이 생성되었습니다.'); location.replace('../home/main');</script>".formatted(id));
 
     } catch (SQLException e) {
       e.printStackTrace();

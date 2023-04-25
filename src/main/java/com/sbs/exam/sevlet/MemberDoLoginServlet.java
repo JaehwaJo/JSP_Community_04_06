@@ -49,19 +49,19 @@ public class MemberDoLoginServlet extends HttpServlet {
       Map<String, Object> memberRow = DBUtil.selectRow(conn, sql);
 
       if(memberRow.isEmpty()) {
-        rq.appendBody("<script>alert('%s(은)는 없는 아이디입니다.'); history.back();</script>".formatted(loginId));
+        rq.print("<script>alert('%s(은)는 없는 아이디입니다.'); history.back();</script>".formatted(loginId));
         return;
       }
 
       if(((String)memberRow.get("loginPw")).equals(loginPw) == false ) {
-        rq.appendBody("<script>alert('로그인 비번이 일치하지 않습니다.'); history.back();</script>");
+        rq.print("<script>alert('로그인 비번이 일치하지 않습니다.'); history.back();</script>");
         return;
       }
 
       HttpSession session = req.getSession();
       session.setAttribute("loginedMemberId", memberRow.get("id"));
 
-      rq.appendBody("<script>alert('로그인 되었습니다.'); location.replace('../home/main');</script>");
+      rq.print("<script>alert('로그인 되었습니다.'); location.replace('../home/main');</script>");
 
 
     } catch (SQLException e) {
