@@ -1,10 +1,12 @@
 package com.sbs.exam.controller;
 
 import com.sbs.exam.Rq;
+import com.sbs.exam.dto.Member;
 import com.sbs.exam.dto.ResultData;
 import com.sbs.exam.service.MemberService;
 import com.sbs.exam.util.DBUtil;
 import com.sbs.exam.util.SecSql;
+import com.sbs.exam.util.Util;
 import jakarta.servlet.http.HttpSession;
 
 import java.sql.Connection;
@@ -52,7 +54,11 @@ public class MemberController extends Controller {
       rq.historyBack(loginRd.getMsg());
     }
 
-    rq.replace(loginRd.getMsg(), "../home/main");
+    Member member = (Member) loginRd.getBody().get("member");
+
+    rq.setSessionAttr("loginedMemberJson", Util.toJson(member, ""));
+
+    rq.replace(loginRd.getMsg(), "../article/list");
   }
 
   private void actionShowLogin(Rq rq) {

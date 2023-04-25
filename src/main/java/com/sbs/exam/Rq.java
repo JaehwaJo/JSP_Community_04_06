@@ -119,4 +119,17 @@ public class Rq {
   public void setAttr(String  attrName, Object attrValue) {
     req.setAttribute(attrName, attrValue);
   }
+
+
+  public void setSessionAttr(String attrName, String attrValue) {
+    req.getSession().setAttribute(attrName, attrValue);
+  }
+
+  public void removeSessionAttr(String attrName) {
+    req.getSession().removeAttribute(attrName);
+  }
+
+  public <T> T getSessionAttr(String attrName) {
+    return (T) req.getSession().getAttribute(attrName);
+  }
 }
