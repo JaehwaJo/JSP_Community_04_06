@@ -7,21 +7,25 @@
 
 <script>
     let ArticleWrite__submitDone = false;
+
     function ArticleWrite__submit(form) {
       if(ArticleWrite__submitDone) {
         alert('처리 중입니다.');
         return;
       }
+
       if(form.title.value.length == 0) {
         alert('제목을 입력해주세요.');
         form.title.focus();
         return;
       }
+
       if(form.body.value.length == 0) {
         alert('내용을 입력해주세요.');
         form.body.focus();
         return;
       }
+
       form.submit();
       ArticleWrite__submitDone = true;
     }

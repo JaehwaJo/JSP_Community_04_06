@@ -7,23 +7,29 @@
 
 <script>
     let LoginForm__submitDone = false;
+
     function LoginForm__submit(form) {
       if(LoginForm__submitDone) {
         alert('처리 중입니다.');
         return;
       }
+
       form.loginId.value = form.loginId.value.trim();
+
       if(form.loginId.value.length == 0) {
         alert('로그인 아이디를 입력해주세요.');
         form.loginId.focus();
         return;
       }
+
       form.loginPw.value = form.loginPw.value.trim();
+
       if(form.loginPw.value.length == 0) {
         alert('로그인 비번을 입력해주세요.');
         form.loginPw.focus();
         return;
       }
+
       form.submit();
       LoginForm__submitDone = true;
     }
