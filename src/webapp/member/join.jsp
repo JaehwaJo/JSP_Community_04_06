@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!doctype html>
-<html lang="ko">
-<head>
-  <title>회원가입</title>
-</head>
-<body>
-  <h1>회원가입</h1>
+<c:set var="pageTitle" value="회원가입"/>
+<%@ include file="../part/head.jspf" %>
+<h1>회원가입</h1>
 
-  <script>
+<script>
     let JoinForm__submitDone = false;
     function JoinForm__submit(form) {
       if(JoinForm__submitDone) {
@@ -49,18 +46,17 @@
     }
   </script>
 
-  <form action="doJoin" method="POST" onsubmit="JoinForm__submit(this); return false">
-    <div>로그인 아이디 : <input placeholder="로그인 아이디를 입력해주세요." name="loginId" type="text"></div>
-    <div>로그인 패스워드 : <input placeholder="로그인 비번을 입력해주세요." name="loginPw" type="password"></div>
-    <div>로그인 비번 확인 : <input placeholder="로그인 비번 확인을 입력해주세요." name="loginPwConfirm" type="password"></div>
-    <div>이름 : <input placeholder="이름을 입력해주세요." name="name" type="text"></div>
-    <div>
-      <button type="submit">가입</button>
-      <button type="button">
-        <a href="../home/main">취소</a>
-      </button>
-    </div>
-  </form>
+<form action="doJoin" method="POST" onsubmit="JoinForm__submit(this); return false">
+  <div>로그인 아이디 : <input placeholder="로그인 아이디를 입력해주세요." name="loginId" type="text"></div>
+  <div>로그인 패스워드 : <input placeholder="로그인 비번을 입력해주세요." name="loginPw" type="password"></div>
+  <div>로그인 비번 확인 : <input placeholder="로그인 비번 확인을 입력해주세요." name="loginPwConfirm" type="password"></div>
+  <div>이름 : <input placeholder="이름을 입력해주세요." name="name" type="text"></div>
+  <div>
+    <button type="submit">가입</button>
+    <button type="button">
+      <a href="../home/main">취소</a>
+    </button>
+  </div>
+</form>
 
-</body>
-</html>
+<%@ include file="../part/foot.jspf" %>
