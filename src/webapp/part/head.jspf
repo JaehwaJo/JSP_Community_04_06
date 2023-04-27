@@ -41,7 +41,7 @@
     <nav class="top-bar__menu-box-1">
       <ul class="flex h-full">
         <li class="hover:bg-white hover:text-[#afafaf]">
-          <c:if test="${!isLogined}">
+          <c:if test="${rq.notLogined}">
             <a class="flex h-full items-center px-3" href="/usr/member/join">
               <span><i class="fa-solid fa-user-plus"></i></span>
               &nbsp;
@@ -50,7 +50,7 @@
           </c:if>
         </li>
         <li class="hover:bg-white hover:text-[#afafaf]">
-          <c:if test="${!isLogined}">
+          <c:if test="${rq.notLogined}">
             <a class="flex h-full items-center px-3" href="/usr/member/login">
               <spna><i class="fa-solid fa-user"></i></spna>
               &nbsp;
@@ -59,16 +59,16 @@
           </c:if>
         </li>
         <li class="hover:bg-white hover:text-[#afafaf]">
-          <c:if test="${isLogined}">
+          <c:if test="${rq.logined}">
             <a class="flex h-full items-center px-3" href="/usr/member/myPage">
               <spna><i class="fa-solid fa-heart"></i></spna>
               &nbsp;
-              <span>"${loginedMemberName}" 회원</span>
+              <span>"${rq.loginedMemberName}" 회원</span>
             </a>
           </c:if>
         </li>
         <li class="hover:bg-white hover:text-[#afafaf]">
-          <c:if test="${isLogined}">
+          <c:if test="${rq.logined}">
             <a class="flex h-full items-center px-3" href="/usr/member/doLogout">
               <spna><i class="fa-solid fa-arrow-right-from-bracket"></i></spna>
               &nbsp;

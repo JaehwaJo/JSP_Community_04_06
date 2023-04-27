@@ -1,5 +1,6 @@
 package com.sbs.exam;
 
+import com.sbs.exam.dto.Member;
 import com.sbs.exam.util.Util;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -7,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.io.IOException;
@@ -24,6 +26,18 @@ public class Rq {
   private String actionMethodName;
   @Getter
   private boolean isInvalid = false;
+  @Getter
+  @Setter
+  private boolean isLogined = false;
+  @Getter
+  @Setter
+  private int loginedMemberId = 0;
+  @Getter
+  @Setter
+  private String loginedMemberName = null;
+  @Getter
+  @Setter
+  private Member loginedMember = null;
 
   public Rq(HttpServletRequest req, HttpServletResponse resp) {
     this.req = req;
@@ -131,5 +145,13 @@ public class Rq {
 
   public <T> T getSessionAttr(String attrName) {
     return (T) req.getSession().getAttribute(attrName);
+  }
+
+  public String getActionPath() {
+    return "/" + controllerTypeName + "/" + controllerName + "/" + actionMethodName;
+  }
+
+  public boolean isNotLogined() {
+    return !isLogined;
   }
 }
