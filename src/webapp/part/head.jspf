@@ -63,7 +63,7 @@
             <a class="flex h-full items-center px-3" href="/usr/member/myPage">
               <spna><i class="fa-solid fa-heart"></i></spna>
               &nbsp;
-              <span>"${loginedMemberJson.get("name")}" 회원</span>
+              <span>"${loginedMemberRow.get("name")}" 회원</span>
             </a>
           </c:if>
         </li>

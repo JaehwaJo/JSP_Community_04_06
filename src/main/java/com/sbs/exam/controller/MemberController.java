@@ -1,6 +1,7 @@
 package com.sbs.exam.controller;
 
 import com.sbs.exam.Rq;
+import com.sbs.exam.container.Container;
 import com.sbs.exam.dto.Member;
 import com.sbs.exam.dto.ResultData;
 import com.sbs.exam.service.MemberService;
@@ -13,11 +14,7 @@ import java.sql.Connection;
 import java.util.Map;
 
 public class MemberController extends Controller {
-  private MemberService memberService;
-
-  public MemberController(Connection conn) {
-    memberService = new MemberService(conn);
-  }
+  private MemberService memberService = Container.memberService;
 
   @Override
   public void performAction(Rq rq) {

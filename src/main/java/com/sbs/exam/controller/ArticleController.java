@@ -1,6 +1,7 @@
 package com.sbs.exam.controller;
 
 import com.sbs.exam.Rq;
+import com.sbs.exam.container.Container;
 import com.sbs.exam.dto.Article;
 import com.sbs.exam.dto.ResultData;
 import com.sbs.exam.service.ArticleService;
@@ -11,11 +12,7 @@ import java.sql.Connection;
 import java.util.List;
 
 public class ArticleController extends Controller {
-  private ArticleService articleService;
-
-  public ArticleController(Connection conn) {
-    articleService = new ArticleService(conn);
-  }
+  private ArticleService articleService = Container.articleService;
 
   @Override
   public void performAction(Rq rq) {
