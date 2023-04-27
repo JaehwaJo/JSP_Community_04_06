@@ -25,10 +25,18 @@ public class MemberController extends Controller {
       case "doLogin":
         actionDoLogin(rq);
         break;
+      case "doLogout":
+        actionDoLogout(rq);
+        break;
       default:
         rq.println("존재하지 않는 페이지입니다.");
         break;
     }
+  }
+
+  private void actionDoLogout(Rq rq) {
+    rq.removeSessionAttr("loginedMemberJson");
+    rq.replace("로그아웃 되었습니다.", "../home/main");
   }
 
   private void actionDoLogin(Rq rq) {
@@ -55,7 +63,7 @@ public class MemberController extends Controller {
 
     rq.setSessionAttr("loginedMemberJson", Util.toJson(member, ""));
 
-    rq.replace(loginRd.getMsg(), "../article/list");
+    rq.replace(loginRd.getMsg(), "../home/main");
   }
 
   private void actionShowLogin(Rq rq) {
