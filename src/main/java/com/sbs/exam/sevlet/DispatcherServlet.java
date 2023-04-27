@@ -6,6 +6,7 @@ import com.sbs.exam.container.Container;
 import com.sbs.exam.controller.ArticleController;
 import com.sbs.exam.controller.MemberController;
 import com.sbs.exam.exception.SQLErrorException;
+import com.sbs.exam.interceptor.Interceptor;
 import com.sbs.exam.util.DBUtil;
 import com.sbs.exam.util.SecSql;
 import jakarta.servlet.ServletException;
@@ -45,30 +46,16 @@ public class DispatcherServlet extends HttpServlet {
       conn = DriverManager.getConnection(Config.getDBUrl(), Config.getDBId(), Config.getDBPw());
       Container.conn = conn;
 
-      // 모든 요청을 들어가기 전에 무조건 해야 하는 일 시작
-      HttpSession session = req.getSession();
-
-      boolean isLogined = false;
-      int loginedMemberId = -1;
-      Map<String, Object> loginedMemberRow = null;
-
-      if(session.getAttribute("loginedMemberId") != null) {
-        loginedMemberId = (int) session.getAttribute("loginedMemberId");
-        isLogined = true;
-
-        SecSql sql = SecSql.from("SELECT * FROM member");
-        sql.append("WHERE id = ?", loginedMemberId);
-        loginedMemberRow = DBUtil.selectRow(conn, sql);
+      if(runInterceptor(rq) == false) {
+        return;
       }
-
-      req.setAttribute("isLogined", isLogined);
-      req.setAttribute("loginedMemberId", loginedMemberId);
-      req.setAttribute("loginedMemberRow", loginedMemberRow);
-      // 모든 요청을 들어가기 전에 무조건 해야 하는 일 끝
 
       switch (rq.getControllerTypeName()) {
         case "usr" :
           switch (rq.getControllerName()) {
+            case "home":
+              Container.homeController.performAction(rq);
+              break;
             case "article":
               Container.articleController.performAction(rq);
               break;
@@ -92,6 +79,22 @@ public class DispatcherServlet extends HttpServlet {
       }
     }
     // DB 연결 끝
+  }
+
+  private boolean runInterceptor(Rq rq) {
+    if(Container.beforeActionInterceptor.runBeforeAction(rq) == false) {
+      return false;
+    }
+
+    if(Container.needLoginInterceptor.runBeforeAction(rq) == false) {
+      return false;
+    }
+
+    if(Container.needLogoutInterceptor.runBeforeAction(rq) == false) {
+      return false;
+    }
+
+    return true;
   }
 
   @Override

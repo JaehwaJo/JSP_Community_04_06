@@ -1,6 +1,7 @@
 package com.sbs.exam.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -117,6 +118,25 @@ public class Util {
       return om.writeValueAsString(obj);
     } catch (JsonProcessingException e) {
       return defaultValue;
+    }
+  }
+  public static <T> T toObjFromJson(String jsonStr, TypeReference<T> typeReference) {
+    ObjectMapper om = new ObjectMapper();
+
+    try {
+      return (T) om.readValue(jsonStr, typeReference);
+    } catch (JsonProcessingException e) {
+      return null;
+    }
+  }
+
+  public static <T> T toObjFromJson(String jsonStr, Class<T> cls) {
+    ObjectMapper om = new ObjectMapper();
+
+    try {
+      return (T) om.readValue(jsonStr, cls);
+    } catch (JsonProcessingException e) {
+      return null;
     }
   }
 }
