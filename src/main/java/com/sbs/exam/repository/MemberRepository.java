@@ -15,4 +15,17 @@ public class MemberRepository {
 
     return new Member(DBUtil.selectRow(Container.conn, sql));
   }
+
+  public int join(String loginId, String loginPw, String name) {
+    SecSql sql = SecSql.from("INSERT INTO member");
+    sql.append("SET regDate = NOW()");
+    sql.append(", updateDate = NOW()");
+    sql.append(", loginId = ?", loginId);
+    sql.append(", loginPw = ?", loginPw);
+    sql.append(", name = ?", name);
+
+    int id = DBUtil.insert(Container.conn, sql);
+
+    return id;
+  }
 }

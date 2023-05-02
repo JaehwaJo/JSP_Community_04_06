@@ -5,7 +5,7 @@ import com.sbs.exam.Rq;
 public class NeedLoginInterceptor extends Interceptor {
   @Override
   public boolean runBeforeAction(Rq rq) {
-    /*
+
     if (rq.getControllerTypeName().equals("usr") == false) {
       return true;
     }
@@ -26,8 +26,6 @@ public class NeedLoginInterceptor extends Interceptor {
       rq.historyBack("로그인 후 이용해주세요.");
       return false;
     }
-
-     */
 
     return true;
   }

@@ -8,10 +8,6 @@ import com.sbs.exam.service.MemberService;
 import com.sbs.exam.util.DBUtil;
 import com.sbs.exam.util.SecSql;
 import com.sbs.exam.util.Util;
-import jakarta.servlet.http.HttpSession;
-
-import java.sql.Connection;
-import java.util.Map;
 
 public class MemberController extends Controller {
   private MemberService memberService = Container.memberService;
@@ -28,10 +24,45 @@ public class MemberController extends Controller {
       case "doLogout":
         actionDoLogout(rq);
         break;
+      case "join":
+        actionShowJoin(rq);
+        break;
+      case "doJoin":
+        actionDoJoin(rq);
+        break;
       default:
         rq.println("존재하지 않는 페이지입니다.");
         break;
     }
+  }
+
+  private void actionDoJoin(Rq rq) {
+    String loginId = rq.getParam("loginId", "");
+    String loginPw = rq.getParam("loginPw", "");
+    String name = rq.getParam("name", "");
+
+    if(loginId.length() == 0) {
+      rq.historyBack("loginId(을)를 입력해주세요");
+      return;
+    }
+
+    if(loginPw.length() == 0) {
+      rq.historyBack("loginPw(을)를 입력해주세요");
+      return;
+    }
+
+    if(name.length() == 0) {
+      rq.historyBack("name(을)를 입력해주세요");
+      return;
+    }
+
+    ResultData joinRd = memberService.join(loginId, loginPw, name);
+
+    rq.replace(joinRd.getMsg(), "../member/login");
+  }
+
+  private void actionShowJoin(Rq rq) {
+    rq.jsp("../member/join");
   }
 
   private void actionDoLogout(Rq rq) {

@@ -86,13 +86,13 @@ public class DispatcherServlet extends HttpServlet {
       return false;
     }
 
-    if(Container.needLoginInterceptor.runBeforeAction(rq) == false) {
-      return false;
-    }
-
-    if(Container.needLogoutInterceptor.runBeforeAction(rq) == false) {
-      return false;
-    }
+//    if(Container.needLoginInterceptor.runBeforeAction(rq) == false) {
+//      return false;
+//    }
+//
+//    if(Container.needLogoutInterceptor.runBeforeAction(rq) == false) {
+//      return false;
+//    }
 
     return true;
   }

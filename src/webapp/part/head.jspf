@@ -24,7 +24,6 @@
   <script defer src="../resource/common.js"></script>
 </head>
 <body>
-<c:set var="isLogined" value="${isLogined}"/>
 
 <header class="top-bar h-20 bg-[#afafaf]">
   <div class="container mx-auto h-full flex px-3">
