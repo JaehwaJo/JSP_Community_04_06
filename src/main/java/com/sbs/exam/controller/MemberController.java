@@ -30,10 +30,40 @@ public class MemberController extends Controller {
       case "doJoin":
         actionDoJoin(rq);
         break;
+      case "findLoginId":
+        actionShowFindLoginId(rq);
+        break;
+      case "doFindLoginId":
+        actionDoFindLoginId(rq);
+        break;
       default:
         rq.println("존재하지 않는 페이지입니다.");
         break;
     }
+  }
+
+
+  private void actionShowFindLoginId(Rq rq) {
+    rq.jsp("../member/findLoginId");
+  }
+
+  private void actionDoFindLoginId(Rq rq) {
+    String name = rq.getParam("name", "");
+
+    if(name.length() == 0) {
+      rq.historyBack("name(을)를 입력해주세요.");
+      return;
+    }
+
+    Member oldMember = memberService.getMemberByName(name);
+
+    if(oldMember == null) {
+      rq.historyBack("일치하는 회원이 존재하지 않습니다.");
+      return;
+    }
+
+    String replaceUri = "../member/login?loginId=" + oldMember.getLoginId();
+    rq.replace(Util.f("해당 회원의 로그인 아이디는 `%s` 입니다.", oldMember.getLoginId()), replaceUri);
   }
 
   private void actionDoJoin(Rq rq) {

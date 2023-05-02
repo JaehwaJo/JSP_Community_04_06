@@ -5,6 +5,8 @@ import com.sbs.exam.dto.ResultData;
 import com.sbs.exam.repository.MemberRepository;
 
 import com.sbs.exam.dto.Member;
+import com.sbs.exam.util.DBUtil;
+import com.sbs.exam.util.SecSql;
 import com.sbs.exam.util.Util;
 
 import java.sql.Connection;
@@ -27,9 +29,9 @@ public class MemberService {
   }
 
   public ResultData join(String loginId, String loginPw, String name) {
-    Member oldMember = getMemberByLoginId(loginId);
+    boolean oldMember = memberRepository.isJoinDuplicateLoginId(loginId);
 
-    if(oldMember != null) {
+    if(oldMember == false) {
       return ResultData.from("F-1", Util.f("%s(은)는 이미 사용중인 로그인아이디입니다.", loginId));
     }
 
@@ -40,5 +42,9 @@ public class MemberService {
 
   public Member getMemberByLoginId(String loginId) {
     return memberRepository.getMemberByLoginId(loginId);
+  }
+
+  public Member getMemberByName(String name) {
+    return memberRepository.getMemberByName(name);
   }
 }
