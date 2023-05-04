@@ -28,14 +28,21 @@
   </script>
 
 <form action="doLogin" method="POST" onsubmit="LoginForm__submit(this); return false">
-  <div>로그인 아이디 : <input placeholder="로그인 아이디를 입력해주세요." name="loginId" type="text" value="${param.loginId}"></div>
-  <div>로그인 패스워드 : <input placeholder="로그인 비번을 입력해주세요." name="loginPw" type="password"></div>
-  <div class="btns">
-    <button type="submit">로그인</button>
-    &nbsp;
-    <a href="../member/findLoginId">아이디찾기</a>
-    &nbsp;
-    <a href="../home/main">취소</a>
+  <div class="login-box h-screen flex flex-col items-center justify-center">
+    <div class="login-box__input flex flex-col gap-y-[10px]">
+      <input type="text" name="loginId" placeholder="로그인 아이디를 입력해주세요." class="input input-bordered w-[300px] max-w-xs" value="${param.loginId}"/>
+      <input type="password" name="loginPw" placeholder="로그인 비밀번호를 입력해주세요." class="input input-bordered w-[300px] max-w-xs"/>
+    </div>
+    <div class="login__box-btns flex flex-col gap-y-[10px] mt-[10px]">
+      <button type="submit" class="btn btn-primary w-[300px]">로그인</button>
+      <div class="login__box-sub-btns text-center">
+        <a href="../member/findLoginId">아이디찾기</a>
+        &nbsp;
+        <a href="../member/join">회원가입</a>
+        &nbsp;
+        <a href="../home/main">취소</a>
+      </div>
+    </div>
   </div>
 </form>
 
