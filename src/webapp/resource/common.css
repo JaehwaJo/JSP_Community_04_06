@@ -1,1 +1,5 @@
 @charset "UTF-8";
+
+.btn-primary {
+    background-color: hsl(var(--p)/var(--tw-bg-opacity)) !important;
+}
