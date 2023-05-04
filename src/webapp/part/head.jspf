@@ -19,9 +19,11 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- 공통 css연결 -->
-  <link rel="stylesheet" href="../resource/common.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/common.css">
+  <!-- 폰트 css연결 -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/font.css">
   <!-- 공통 js 연결 -->
-  <script defer src="../resource/common.js"></script>
+  <script defer src="${pageContext.request.contextPath}/resource/common.js"></script>
 </head>
 <body>
 
