@@ -4,7 +4,7 @@
 <c:set var="pageTitle" value="게시물 리스트"/>
 <%@ include file="../part/head.jspf" %>
 
-<section class="section-article-list">
+<section class="section-article section-article-list">
   <div class="con mx-auto">
     <div class="mt-[50px] flex justify-end">
       <a href="../home/main" class="badge badge-primary hover:underline">홈으로 돌아가기</a>&nbsp;
@@ -43,11 +43,6 @@
         </tbody>
       </table>
     </div>
-    <style>
-    .page > a.red {
-      color: red;
-    }
-    </style>
 
     <div class="page btn-group flex justify-center">
       <c:set var="cPage" value="${page}"/>

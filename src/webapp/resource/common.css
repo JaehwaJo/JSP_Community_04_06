@@ -8,19 +8,24 @@
     background-color: hsl(var(--p)/var(--tw-bg-opacity)) !important;
 }
 
-.section-article-list .table {
+.section-article .table {
 	text-align: none;
 	font-size: 1rem;
 }
 
-.section-article-list .table .thead {
+.section-article .table .thead {
 	text-align: center;
 }
 
-.section-article-list .table th {
+.section-article .table th {
 	font-size: 1rem;
 }
 
 .section-article-list .table th:first-child {
 	text-align: center;
+}
+
+.article-detail__box {
+	border: 2px solid rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
 }
