@@ -18,13 +18,10 @@ public class NeedLoginInterceptor extends Interceptor {
       case "/usr/article/doDelete" :
       case "/usr/article/doLogout" :
       case "/usr/article/myPage" :
-      case "/usr/article/doMyPage" :
-        return true;
-    }
-
-    if (rq.isNotLogined()) {
-      rq.historyBack("로그인 후 이용해주세요.");
-      return false;
+        if (rq.isNotLogined()) {
+          rq.historyBack("로그인 후 이용해주세요.");
+          return false;
+        }
     }
 
     return true;
