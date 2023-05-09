@@ -76,5 +76,4 @@ public class ArticleService {
 
     return ResultData.from("S-1", "삭제가 가능합니다.");
   }
-
 }
