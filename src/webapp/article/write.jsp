@@ -41,13 +41,13 @@
         <a href="list" class="badge badge-primary hover:underline">리스트로 돌아가기</a>&nbsp;
       </div>
       <div class="article-write__box p-[10px]">
-        <div class="detail__title flex items-center h-[50px] pb-[10px] border-b">
+        <div class="write__title flex items-center h-[50px] pb-[10px] border-b">
           <span class="badge w-[100px]">
             제목
           </span>
           <input class="input input-bordered w-full ml-[10px]" autocomplete="off" placeholder="제목을 입력해주세요." name="title" type="text">
         </div>
-        <div class="detail__body flex flex-col min-h-[400px] mt-[10px]">
+        <div class="write__body flex flex-col min-h-[400px] mt-[10px]">
           <span class="badge w-[100px]">
             내용
           </span>
