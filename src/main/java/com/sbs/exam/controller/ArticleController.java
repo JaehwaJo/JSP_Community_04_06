@@ -56,10 +56,25 @@ public class ArticleController extends Controller {
       return;
     }
 
+    Article article = articleService.getForPrintArticleById(id);
+
+    if(article == null) {
+      rq.historyBack(Util.f("%d번 게시물이 존재하지 않습니다.", id));
+      return;
+    }
+
+    ResultData actorCanModifyRd = articleService.actorCanModifyRd(rq.getLoginedMember(), article);
+
+    if(actorCanModifyRd.isFail()) {
+      rq.historyBack(actorCanModifyRd.getMsg());
+      return;
+    }
+
     if (title.length() == 0) {
       rq.historyBack("title을 입력해주세요.");
       return;
     }
+
     if (body.length() == 0) {
       rq.historyBack("body를 입력해주세요.");
       return;
@@ -73,7 +88,7 @@ public class ArticleController extends Controller {
     int id = rq.getIntParam("id", 0);
 
     if (id == 0) {
-      System.out.println("id를 입력해주세요.");
+      rq.historyBack("id를 입력해주세요.");
       return;
     }
 
@@ -81,6 +96,13 @@ public class ArticleController extends Controller {
 
     if (article == null) {
       rq.historyBack(Util.f("%d번 게시물이 존재하지 않습니다.", id));
+      return;
+    }
+
+    ResultData actorCanModifyRd = articleService.actorCanModifyRd(rq.getLoginedMember(), article);
+
+    if(actorCanModifyRd.isFail()) {
+      rq.historyBack(actorCanModifyRd.getMsg());
       return;
     }
 
@@ -92,15 +114,22 @@ public class ArticleController extends Controller {
     int id = rq.getIntParam("id", 0);
     String redirectUri = rq.getParam("redirectUri", "../article/list");
 
-    if(id == 0) {
+    if (id == 0) {
       rq.historyBack("id를 입력해주세요.");
       return;
     }
 
     Article article = articleService.getForPrintArticleById(id);
 
-    if(article == null) {
+    if (article == null) {
       rq.historyBack(Util.f("%d번 게시물이 존재하지 않습니다.", id));
+      return;
+    }
+
+    ResultData actorCanDeleteRd = articleService.actorCanDeleteRd(rq.getLoginedMember(), article);
+
+    if(actorCanDeleteRd.isFail()) {
+      rq.historyBack(actorCanDeleteRd.getMsg());
       return;
     }
 
@@ -117,6 +146,11 @@ public class ArticleController extends Controller {
     }
 
     Article article = articleService.getForPrintArticleById(id);
+
+    if (article == null) {
+      rq.historyBack(Util.f("%d번 게시물이 존재하지 않습니다.", id));
+      return;
+    }
 
     rq.setAttr("article", article);
     rq.jsp("../article/detail");
@@ -154,7 +188,6 @@ public class ArticleController extends Controller {
     int id = (int) writeRd.getBody().get("id");
     redirectUri = redirectUri.replace("[NEW_ID]", id + "");
 
-    // rq.printf(writeRd.getMsg());
     rq.replace(writeRd.getMsg(), redirectUri);
   }
 
