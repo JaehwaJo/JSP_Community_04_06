@@ -3,7 +3,6 @@
 
 <c:set var="pageTitle" value="회원가입"/>
 <%@ include file="../part/head.jspf" %>
-
 <script>
     let JoinForm__submitDone = false;
 
@@ -56,17 +55,36 @@
     }
   </script>
 
+
+
 <form action="doJoin" method="POST" onsubmit="JoinForm__submit(this); return false">
-  <div>로그인 아이디 : <input placeholder="로그인 아이디를 입력해주세요." name="loginId" type="text"></div>
-  <div>로그인 패스워드 : <input placeholder="로그인 비번을 입력해주세요." name="loginPw" type="password"></div>
-  <div>로그인 비번 확인 : <input placeholder="로그인 비번 확인을 입력해주세요." name="loginPwConfirm" type="password"></div>
-  <div>이름 : <input placeholder="이름을 입력해주세요." name="name" type="text"></div>
-  <div>
-    <button type="submit">가입</button>
-    <button type="button">
-      <a href="../home/main">취소</a>
-    </button>
-  </div>
+  <section class="join-wrap min-h-screen flex items-center justify-center">
+    <div class="form-control w-full max-w-xs">
+      <h1 class="text-center text-[2rem] font-bold mb-[20px]">회원 가입</h1>
+      <label class="label">
+        <span class="label-text">로그인 아이디</span>
+      </label>
+      <input type="text" name="loginId" placeholder="로그인 아이디를 입력해주세요." class="input input-bordered w-full max-w-xs" />
+      <label class="label">
+        <span class="label-text">비밀번호</span>
+      </label>
+      <input type="password" name="loginPw" placeholder="로그인 비밀번호를 입력해주세요." class="input input-bordered w-full max-w-xs" />
+      <label class="label">
+        <span class="label-text">로그인 비밀번호 확인</span>
+      </label>
+      <input type="password" name="loginPwConfirm" placeholder="로그인 비밀번호 확인 입력해주세요." class="input input-bordered w-full max-w-xs" />
+      <label class="label">
+        <span class="label-text">이름</span>
+      </label>
+      <input type="text" name="name" placeholder="이름을 입력해주세요." class="input input-bordered w-full max-w-xs" />
+      <div class="btns mt-[10px] ml-auto">
+        <button type="submit" class="btn btn-primary ">가입</button>
+        <button type="button" class="btn btn-secondary">
+          <a href="../home/main">취소</a>
+        </button>
+      </div>
+    </div>
+  </section>
 </form>
 
 <%@ include file="../part/foot.jspf" %>

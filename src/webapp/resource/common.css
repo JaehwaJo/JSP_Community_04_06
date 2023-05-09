@@ -8,6 +8,10 @@
     background-color: hsl(var(--p)/var(--tw-bg-opacity)) !important;
 }
 
+.join-wrap .btns .btn-secondary {
+    background-color: hsl(var(--s)/var(--tw-bg-opacity)); !important;
+}
+
 .section-article .table {
 	text-align: none;
 	font-size: 1rem;
